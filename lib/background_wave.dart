@@ -28,7 +28,7 @@ class BackgroundWaveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     var path = Path();
 
-    const minSize = 140;
+    const minSize = 140.0;
 
     // when h = max = 280
     // h = 280, p1 = 210, p1Diff = 70
@@ -37,13 +37,8 @@ class BackgroundWaveClipper extends CustomClipper<Path> {
     final p1Diff = ((minSize - size.height) * 0.5).truncate().abs();
     path.lineTo(0.0, size.height - p1Diff);
 
-    // when h = max = 280
-    // h = 280, p2 = 140, p2Diff = 140
-    // when h = min = 140
-    // h = 140, p1 = 140, p2Diff = 0
-    final p2Diff = ((minSize - size.height) * 1).truncate().abs();
     final controlPoint = Offset(size.width * 0.4, size.height);
-    final endPoint = Offset(size.width, size.height - p2Diff);
+    final endPoint = Offset(size.width, minSize);
 
     path.quadraticBezierTo(
         controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
